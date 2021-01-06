@@ -1,7 +1,0 @@
-﻿  Karatsuba_Multiplication.cpp
-C:\Users\BlueB\Dropbox (Hunter College)\Year 2 Semester 6\Algorithms\Karatsuba_Multiplication.cpp(11,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\BlueB\Dropbox (Hunter College)\Year 2 Semester 6\Algorithms\Karatsuba_Multiplication.cpp(13,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\BlueB\Dropbox (Hunter College)\Year 2 Semester 6\Algorithms\Karatsuba_Multiplication.cpp(25,38): warning C4244: 'return': conversion from 'double' to 'long', possible loss of data
-  Source.cpp
-C:\Users\BlueB\source\repos\katsubaTest\katsubaTest\Source.cpp(15,13): error C3861: 'karatsuba': identifier not found
-  Generating Code...

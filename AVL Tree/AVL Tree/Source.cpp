@@ -1,10 +1,12 @@
-#include "BST.h"
+#include "BST_ITR.h"
 #include <iostream>
+#include "Node.h";
 
 using namespace std;
 
+/*
 int main() {
-	BST tree;
+	BST_ITR tree;
 	tree.insertNode(2);
 	tree.insertNode(4);
 	tree.insertNode(5);
@@ -15,11 +17,13 @@ int main() {
 
 	cout << tree << endl << endl;
 	cout << (int)tree.contains(3) << endl <<endl;
-	//tree.deleteNode(5); Leaf Node Tests
+	//tree.deleteNode(5); //Leaf Node Tests
 	//tree.deleteNode(3);
 	//tree.deleteNode(1);
-	//tree.deleteNode(7); One Child Tests
+	//tree.deleteNode(7); //One Child Tests
 	//tree.deleteNode(5);
-	//tree.deleteNode(4); Two Child Tests
-	cout << tree;
-}
+	//tree.deleteNode(4); //Two Child Tests
+	cout << tree << endl << endl;
+
+	cout << sizeof(Node(2)) << " " << sizeof(new Node(3)); 
+}*/
