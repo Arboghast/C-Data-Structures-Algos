@@ -1,0 +1,8 @@
+﻿  BST_RCUR.cpp
+C:\Users\BlueB\source\repos\AVL Tree\AVL Tree\BST_RCUR.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Source1.cpp
+C:\Users\BlueB\source\repos\AVL Tree\AVL Tree\Source1.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\BlueB\source\repos\AVL Tree\AVL Tree\BST_RCUR.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+C:\Users\BlueB\source\repos\AVL Tree\AVL Tree\BST_RCUR.cpp(50): warning C4715: '<lambda_78557d17d1aa9a79773f36a1434aa84f>::operator()': not all control paths return a value
+  AVL Tree.vcxproj -> C:\Users\BlueB\source\repos\AVL Tree\Debug\Binary Trees.exe
