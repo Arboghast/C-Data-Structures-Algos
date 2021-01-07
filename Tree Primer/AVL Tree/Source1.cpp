@@ -2,6 +2,7 @@
 #include <iostream>
 
 using namespace std;
+/*
 int main() {
 	BST_RCUR tree;
 	tree.insertNode(2);
@@ -24,4 +25,4 @@ int main() {
 	tree.deleteNode(2);
 	tree.setMode(1);
 	cout << tree << endl << endl;
-}
+}*/

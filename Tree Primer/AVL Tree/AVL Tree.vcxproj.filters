@@ -30,6 +30,9 @@
     <ClCompile Include="AVL_TREE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST_ITR.h">

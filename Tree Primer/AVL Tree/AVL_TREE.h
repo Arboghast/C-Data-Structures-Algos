@@ -6,16 +6,17 @@ class AVL_TREE
 {
 	public:
 		AVL_TREE(Node* node = nullptr) :head(node) {};
-		bool search(int num);
-		void insertNode(int num);
+		bool contains(int num);
+		void insertNode(int val);
 		void deleteNode(int num);
-		int height(Node* node);
-		void LLRotation(Node* node);
-		void RRRotation(Node* node);
-		void LRRotation(Node* node);
-		void RLRotation(Node* node);
-
-		void Recurse(int num, Node* node);
+		Node* rebalance(Node* node, int val);
+		int getBalance(Node* node);
+		int getHeight(Node* node);
+		int newHeight(Node* node);
+		Node* LeftRotation(Node* node);
+		Node* RightRotation(Node* node);
+		Node* LeftRight(Node* node);
+		Node* RightLeft(Node* node);
 
 		friend std::ostream& operator<<(std::ostream& os, AVL_TREE tree);
 
