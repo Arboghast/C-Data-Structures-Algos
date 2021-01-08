@@ -1,7 +1,7 @@
 ﻿  AVL_TREE.cpp
 C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(133): warning C4715: 'AVL_TREE::LeftRotation': not all control paths return a value
-C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(112): warning C4715: 'AVL_TREE::RightLeft': not all control paths return a value
-C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(120): warning C4715: 'AVL_TREE::LeftRight': not all control paths return a value
-C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(146): warning C4715: 'AVL_TREE::RightRotation': not all control paths return a value
+C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(214): warning C4715: 'AVL_TREE::RightLeft': not all control paths return a value
+C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(222): warning C4715: 'AVL_TREE::LeftRight': not all control paths return a value
+C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(235): warning C4715: 'AVL_TREE::LeftRotation': not all control paths return a value
+C:\Users\BlueB\source\repos\Tree Primer\AVL Tree\AVL_TREE.cpp(248): warning C4715: 'AVL_TREE::RightRotation': not all control paths return a value
   AVL Tree.vcxproj -> C:\Users\BlueB\source\repos\Tree Primer\x64\Debug\Trees.exe

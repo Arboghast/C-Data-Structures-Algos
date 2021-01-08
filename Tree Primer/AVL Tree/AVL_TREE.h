@@ -10,6 +10,7 @@ class AVL_TREE
 		void insertNode(int val);
 		void deleteNode(int num);
 		Node* rebalance(Node* node, int val);
+		Node* deleteCases(Node* node, int val);
 		int getBalance(Node* node);
 		int getHeight(Node* node);
 		int newHeight(Node* node);
@@ -22,4 +23,5 @@ class AVL_TREE
 
 	private:
 		Node* head;
+		int BALANCE_FACTOR = 1;
 };
