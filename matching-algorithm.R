@@ -82,5 +82,8 @@ for(i in 16:30){
 }
 
 colors <- ifelse(1:30 %in% set1, "pink", "red")  #separately color bipartite sets
+shapes <- ifelse(1:30 %in% set1, "circle", "square") #seperately assign shapes
 graph <- graph_from_edgelist(edges, directed= FALSE )
-plot(graph, vertex.color= colors)
+V(graph)$type <- 1:30 %in% set1
+plot(graph, layout = layout_as_bipartite, 
+     vertex.color= colors, vertex.shape = shapes, edge.width = 4)

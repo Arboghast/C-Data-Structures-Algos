@@ -1,3 +1,9 @@
+#
+# Sami Hossain
+# 02/23/2021
+# Custom Implementation of the Basic Coloring Algorithm
+#
+
 library(igraph)
 
 colors = sample(colors()) #randomize the colors array
