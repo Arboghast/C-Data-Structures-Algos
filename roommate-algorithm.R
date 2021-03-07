@@ -9,6 +9,8 @@
 ############
 library(igraph)
 
+#rseed <- floor(runif(1, min = 1, max= 10000))
+
 mat <- matrix(nrow = 20, ncol = 19)
 
 for(i in 1:20){
@@ -89,6 +91,12 @@ for(i in 1:20){   #loop through all the nodes
 `%notin%` <- Negate(`%in%`)
 
 while(sum(is.na(mat))< 360){ #every row having one choice, 20*18
+  for(d in 1:20){   #checks if any row is completely NA, implying no stable matching
+    if(all(is.na(mat[d,]))){
+      stop("No Stable Matching Exists")
+    }
+  }
+  
   last <- numeric()   #keep track of the last elements
   second <- numeric()  #keep track of the 2nd elements
   indx <- 0
@@ -100,7 +108,7 @@ while(sum(is.na(mat))< 360){ #every row having one choice, 20*18
     }
   }
   toggle <- TRUE
-  while(last[1] %notin% last[-1] && last[1] %notin% second){ #cycle condition
+  while(TRUE %notin% duplicated(last)){ #cycle condition
     if(toggle){
       antiset <- which(!is.na(mat[indx,]))    #alternate between 2nd element
       second <- c(second, mat[indx,antiset[2]])
@@ -113,7 +121,9 @@ while(sum(is.na(mat))< 360){ #every row having one choice, 20*18
       toggle <- TRUE
     }
   }    #loop ends when the first element in the last vector is repeated
-  last <- last[-1]
+  cycle_start <- match(last[length(last)], last)   #returns the index of the first duplicate
+  last <- last[-1:-cycle_start]  #truncate list based on the cycle starting position
+  second <- second[cycle_start:length(second)]  #same for this list aswell
   for(m in 1:length(last)){  #mutual crossouts among the nodes of the same index
     for(s in 1:19){
       if(!is.na(mat[last[m],s]) && mat[last[m],s] == second[m]){ #second crosses out last
