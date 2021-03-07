@@ -120,7 +120,7 @@ while(sum(is.na(mat))< 360){ #every row having one choice, 20*18
       indx <- mat[indx, antiset[length(antiset)]]
       toggle <- TRUE
     }
-  }    #loop ends when the first element in the last vector is repeated
+  }    #loop ends when an element in the last vector is repeated
   cycle_start <- match(last[length(last)], last)   #returns the index of the first duplicate
   last <- last[-1:-cycle_start]  #truncate list based on the cycle starting position
   second <- second[cycle_start:length(second)]  #same for this list aswell
@@ -150,7 +150,7 @@ for(i in 1:20){
     w <- w+1
   }
 }
-graph <- graph_from_edgelist(edges, directed= TRUE )
+graph <- graph_from_edgelist(edges, directed= FALSE)
 V(graph)$shape <- "square"
 V(graph)$color <- "whitesmoke"
 plot(graph)
