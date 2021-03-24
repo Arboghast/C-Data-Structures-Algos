@@ -4,6 +4,7 @@
 # Custom Implementation of Dinitz's (Maximum Flow) Algorithm
 #                         (Cherkassky Optimization)
 #
+#   Batch processing of paths === Maximum Flow Path can be decomposed into several(<N) Blocking Flows Paths
 
 ############
 ### SETUP ##
@@ -42,6 +43,7 @@ plot(graph, edge.arrow.size = .75, edge.arrow.width= .75)
 
 remove(i, rand)
 graph2 <- graph
+
 ################
 ### ALGORITHM ##
 ################
@@ -50,20 +52,19 @@ MaxFlow <<- 0
 flowEdges <<- matrix(0L, nrow = nodes, ncol= nodes)  #keep track of flow pushed to every edge for plotting purposes
 
 dfs <- function(source, sink) {
-  
-  flow <<- c(flow, source)
+  flow <<- c(flow, source) #concatenate current element
   
   if(source == sink){
+    if(length(flow) > 1){
+      augmentFlow(flow)
+    }
     return(sink)
   }
   
   # Recurse with all children
   children <- which(graph[source,] != 0)
   for(i in children) {
-
-    if(V(graph)[source]$level+1 == V(graph)[i]$level  ){   #get all adjacent/uphill vertexes 
-      #print(cat(source, i,  sink))
-
+    if(V(graph)[source]$level+1 == V(graph)[i]$level  ){   #get all adjacent & uphill(> level) vertexes 
       result = dfs(i, sink)
       if (!is.null(result)) {
         return (result)
@@ -78,7 +79,6 @@ dfs <- function(source, sink) {
 augmentFlow <- function(flow) {
   minFlow <- Inf
   for(i in 1:length(flow)-1){
-    #print(graph[flow[i],flow[i+1]])
     minFlow <- min(minFlow, graph[flow[i],flow[i+1]])
   }
   
@@ -95,7 +95,6 @@ augmentFlow <- function(flow) {
     flowEdges[flow[i], flow[i+1]] <<- flowEdges[flow[i], flow[i+1]] + minFlow
   }
   
-  #print(minFlow)
   MaxFlow <<- MaxFlow + minFlow
 }
 
@@ -105,20 +104,21 @@ repeat{
   if(is.nan(V(graph)[sink]$level)){ break }  #sink is disconnected from source
   
   flow <<- c()  #reset every dfs iteration
-  dfs(source,sink)  #dfs blocking path 
-  if(length(flow) != 0) {
-    augmentFlow(flow) 
-    
-    plot(graph, edge.arrow.size = .75, edge.arrow.width= .75)
-    date_time<-Sys.time()
-    while((as.numeric(Sys.time()) - as.numeric(date_time))<.75){}  #manual half second delay to process plot changes
-  }
+  dfs(source,sink)  #dfs blocking paths 
+  
+  plot(graph, edge.arrow.size = .75, edge.arrow.width= .75)
+  date_time<-Sys.time()
+  while((as.numeric(Sys.time()) - as.numeric(date_time))<.75){}  #manual 3/4 second delay to visually process plot changes
 }
 
+
+################
+### VISUALIZE ##
+################
 #simplify the flow matrix
 for(i in 1:nodes){
   for(j in 1:nodes){
-    if(flowEdges[i,j] >0 && flowEdges[j,i] > 0){  #if there was flow sent through both an edge and its inverse edge
+    if(flowEdges[i,j] >0 && flowEdges[j,i] > 0){  #if there was flow sent through both an edge and its inverse edge, we want to combine them
       if(flowEdges[i,j] > flowEdges[j,i]){
         flowEdges[i,j] <- flowEdges[i,j] - flowEdges[j,i]
         flowEdges[j,i] <- 0
@@ -131,7 +131,7 @@ for(i in 1:nodes){
   }
 }
 
-for(i in 1:nodes){  #aggregate flow paths with the original graph
+for(i in 1:nodes){  #aggregate all flow paths with the original graph
   for(j in 1:nodes){
     if(flowEdges[i,j]>0){
       graph2[i,j] <- flowEdges[i,j]
@@ -148,5 +148,5 @@ remove(i,j,date_time,edge,flow)
 V(graph2)[sink]$color <- "azure"
 V(graph2)[source]$color <- "azure"
 E(graph2)$width <- E(graph2)$weight/10
-plot(graph2)
+plot(graph2, edge.arrow.size = .75, edge.arrow.width= .75)
 print(paste0("Max flow value: ", MaxFlow))
