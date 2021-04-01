@@ -111,7 +111,7 @@ remove(exc, exc2, i, node, push_to, delta)
 
 for(i in 1:nodes){
   for(j in i:nodes){
-    if(flow_graph[i,j] > 0 && flow_graph[j,i] > 0){
+    if(flow_graph[i,j] > 0 && flow_graph[j,i] > 0){  #equalize the edges with their reverse edges
       if(flow_graph[i,j] > flow_graph[j,i]){
         flow_graph[i,j] <- flow_graph[i,j] - flow_graph[j,i]
         flow_graph[j,i] <- FALSE
