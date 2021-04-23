@@ -16,7 +16,6 @@ plot(graph)
 ################
 ### ALGORITHM ##
 ################
-
 visited <- c()
 components <- list()
 
@@ -46,6 +45,21 @@ for(i in 1:nodes){
   }
 }
 
-components <- components[-1] 
-remove(i,neighbors,visited)
+components <- components[-1] #remove the running total
+remove(i,visited)
+################
+### VISUALIZE ##
+################
+V(graph)$sets <- 0
+
+for(i in 1:length(components)){
+  scc <- components[[i]]
+  for(j in 1:length(scc)){
+    V(graph)$sets[scc[j]] <- i  #apply a value to each node uniquely referencing which scc it is in
+  }
+}
+
+remove(i,j,scc)
+V(graph)$color <- rainbow(nodes)[V(graph)$sets] #assign distinct colors for each individual scc
+plot(graph, mark.groups = split(1:nodes, V(graph)$sets))
 print(paste0("there are: ", length(components), " connected components"))
