@@ -14,11 +14,16 @@ nodes <- 10
 
 graph <-sample_bipartite(nodes, nodes, type= "gnp", .4) #random bipartite graph
 E(graph)$weight <- sample(5:40,length(E(graph)), replace = T) #apply weights to edges
-format <- layout.bipartite(graph)
-plot(graph, layout = format[,c(2,1)]) 
+
+layout <- matrix(ncol = 2, nrow = nodes*2) #custom layout, retain node positions
+layout[1:(nodes*2),1] <- rep(1:nodes, 2)
+layout[1:(nodes*2),2] <- rep(2:1,each = nodes)
+layout <- norm_coords(layout, ymin=-1, ymax=1, xmin=-1, xmax=1)
+
+plot(graph, layout = layout[,c(2,1)]) 
 date_time<-Sys.time()
 while((as.numeric(Sys.time()) - as.numeric(date_time))<1.25){} #manual delay to observe bipartite graph
-remove(format, date_time)
+remove(date_time)
 
 ################
 ### ALGORITHM ##
@@ -103,7 +108,7 @@ while(!is_perfect(matching)){
   good_path <- alternating_bfs_tree(head_node$children) #recursively create a bfs tree with a twist
   
   date_time<-Sys.time()
-  while((as.numeric(Sys.time()) - as.numeric(date_time))<.75){}  #manual 3/4 second delay to visually process plot changes
+  while((as.numeric(Sys.time()) - as.numeric(date_time))<.45){}  #manual delay to visualize plot changes
   plot(as.igraph(head_node, directed = TRUE, direction = "climb"), layout = layout_as_tree)
   
   if(is.null(good_path)){ #update vertex prices to progress to a new good path iteration, every iteration creates a new tight edge
@@ -162,11 +167,9 @@ for(i in 1:nodes){ #to prevent double counting
     }
   }
 }
+remove(i ,j)
 
 #convert matching into a bipartite igraph
 V(matching)$type <- ifelse(1:20 >10, TRUE, FALSE)
-format <- layout.bipartite(matching)
-plot(matching, layout = format[,c(2,1)])
+plot(matching, layout = layout[,c(2,1)])
 print(paste0("Min Cost Perfect Matching - Edge cost: ", sum))
-
-remove(format, i ,j)
