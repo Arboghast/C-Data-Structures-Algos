@@ -34,7 +34,7 @@ for(i in right){ #attach edges incoming to sink
 
 V(graph)[c(sink,source)]$color <- "skyblue"
 plot(graph,layout = format[,c(2,1)])
-remove(i)
+remove(i,left,right,format)
 
 #################
 ###  ALGORITHM ##
@@ -57,8 +57,11 @@ repeat{
   }
   
 }
-plot(graph,layout = format[,c(2,1)])
+remove(path,i,vertexs)
 
+################
+### VISUALIZE ##
+################
 
 if(is.null(flowEdges)){
   print("no Flow exists between source and sink")
@@ -78,7 +81,16 @@ if(is.null(flowEdges)){
     graph2 <- add_edges(graph2, edgelist, color="skyblue", width=3) #color code max flow edges
   }
   
+  layout <- matrix(ncol = 2, nrow = (nodes+1)*2) #custom layout, retain node positions
+  layout[1:(nodes*2),1] <- rep(1:nodes, 2)
+  layout[1:(nodes*2),2] <- rep(2:1,each = nodes)
+  layout[21:22,1] <- 12
+  layout[21,2] <- 2
+  layout[22,2] <- 1
+  layout <- norm_coords(layout, ymin=-1, ymax=1, xmin=-1, xmax=1)
+  
   V(graph2)[c(sink,source)]$color <- "skyblue"
-  plot(graph2,layout = format[,c(2,1)], edge.arrow.size = .55, edge.arrow.width= .55)  
+  plot(graph2,layout = layout[,c(2,1)], edge.arrow.size = .55, edge.arrow.width= .55)  
   print(paste0("Max Cardinality Matching Size: ", Maxflow))
+  remove(edgelist,flow,i,j,flowEdges)
 }
